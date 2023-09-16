@@ -11,7 +11,7 @@ const MovieDetails = () => {
 	return (
 		<div className="lg:grid grid-cols-[226px_auto] gap-x-[37px] h-screen lg:overflow-hidden">
 			<ClientNav />
-			<main className="py-10 lg:pt-[38px] px-10 lg:pr-[51px]">
+			<main className="py-10 lg:pt-[38px] px-10 lg:pr-[51px] overflow-y-auto">
 				<header className="relative flex justify-center items-center w-full h-[449px] rounded-[20px] overflow-hidden">
 					<LazyLoadImage
 						className="w-full h-full object-cover absolute z-0"
