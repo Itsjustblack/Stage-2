@@ -4,8 +4,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import App from "./app";
 import "./index.css";
+import App from "./app";
 
 const queryClient = new QueryClient({
 	queryCache: new QueryCache({
