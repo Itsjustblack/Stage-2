@@ -3,19 +3,19 @@ const Footer = () => {
 		<div className="flex flex-col w-full justify-center items-center gap-y-[36px] mt-[147px] mb-[74px]">
 			<div className="flex gap-x-[48px] justify-center">
 				<img
-					src="/src/assets/facebook.svg"
+					src="/assets/facebook.svg"
 					alt=""
 				/>
 				<img
-					src="/src/assets/instagram.svg"
+					src="/assets/instagram.svg"
 					alt=""
 				/>
 				<img
-					src="/src/assets/twitter.svg"
+					src="/assets/twitter.svg"
 					alt=""
 				/>
 				<img
-					src="/src/assets/youtube.svg"
+					src="/assets/youtube.svg"
 					alt=""
 				/>
 			</div>

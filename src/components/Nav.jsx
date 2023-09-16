@@ -1,12 +1,41 @@
+/* eslint-disable react/prop-types */
 import NavItem from "./NavItem";
+import SearchBar from "./SearchBar";
 
-const Nav = () => {
+export const Nav = ({ query, setQuery }) => {
 	return (
-		<nav className="relative w-full h-screen overflow-hidden flex flex-col justify-between items-center pt-[52px] border border-[#0000004d] rounded-[0px_45px_45px_0px]">
+		<nav className="bg-transparent flex justify-between text-white">
+			<div className="flex items-center gap-x-6">
+				<img
+					className="w-7 h-7 lg:w-[50px] lg:h-[50px] object-cover"
+					src="/assets/logo.png"
+					alt=""
+				/>
+				<span className="font-bold text-xl lg:text-2xl">MovieBox</span>
+			</div>
+			<SearchBar
+				query={query}
+				setQuery={setQuery}
+			/>
+			<div className="flex items-center gap-x-7">
+				<span className="text-sm lg:text-base font-bold">Sign in</span>
+				<img
+					className="w-5 h-5 lg:w-9 lg:h-9"
+					src="/assets/menu.svg"
+					alt=""
+				/>
+			</div>
+		</nav>
+	);
+};
+
+export const ClientNav = () => {
+	return (
+		<nav className="relative w-full h-screen overflow-hidden hidden lg:flex flex-col justify-between items-center pt-[52px] border border-[#0000004d] rounded-[0px_45px_45px_0px]">
 			<div className="flex items-center gap-x-6 mx-5">
 				<img
 					className="w-[50px] h-[50px] object-cover"
-					src="/src/assets/logo.png"
+					src="/assets/logo.png"
 					alt=""
 				/>
 				<span className="font-bold text-2xl text-[#333]">MovieBox</span>
@@ -15,6 +44,7 @@ const Nav = () => {
 				<NavItem
 					title="Home"
 					icon="home"
+					path="/"
 				/>
 				<NavItem
 					title="Movies"
@@ -43,5 +73,3 @@ const Nav = () => {
 		</nav>
 	);
 };
-
-export default Nav;

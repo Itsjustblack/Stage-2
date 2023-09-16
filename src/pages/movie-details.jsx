@@ -1,21 +1,27 @@
-import Nav from "../components/Nav";
+import { useParams } from "react-router-dom";
+import LazyLoadImage from "../components/LazyLoadImage";
+import { ClientNav } from "../components/Nav";
+import { useMovie } from "../hooks/useMovieData";
 
 const MovieDetails = () => {
+	const { id } = useParams();
+	const { data: movie } = useMovie(id);
+	const genres = movie?.genres.map((genre) => genre.name);
+	console.log(genres);
 	return (
-		<div className="grid grid-cols-[226px_auto] gap-x-[37px] h-screen overflow-hidden">
-			<Nav />
-			<main className="pt-[38px] pr-[51px] overflow-y-auto">
+		<div className="lg:grid grid-cols-[226px_auto] gap-x-[37px] h-screen lg:overflow-hidden">
+			<ClientNav />
+			<main className="py-10 lg:pt-[38px] px-10 lg:pr-[51px]">
 				<header className="relative flex justify-center items-center w-full h-[449px] rounded-[20px] overflow-hidden">
-					<img
+					<LazyLoadImage
 						className="w-full h-full object-cover absolute z-0"
-						src="/src/assets/trailer.png"
-						alt=""
+						src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
 					/>
 					<div className="relative z-10">
-						<div className="w-[110px] h-[110px] backdrop-blur-[1px] flex justify-center items-center bg-[#ffffff59] rounded-full border-2 border-[#e8e8e833] mx-auto">
+						<div className="w-[110px] h-[110px] backdrop-blur-[1px] flex justify-center items-center bg-[#ffffff59] rounded-full border-2 border-[#e8e8e833] mx-auto hover:scale-110 transition-transform duration-300">
 							<img
 								className="w-[54px] h-[54px]"
-								src="/src/assets/play_movie.svg"
+								src="/assets/play_movie.svg"
 								alt=""
 							/>
 						</div>
@@ -24,14 +30,30 @@ const MovieDetails = () => {
 				</header>
 				<div className="mt-8 mb-10 grid grid-cols-[2fr_1fr] gap-x-7 font-poppins">
 					<div>
-						<div className="flex gap-x-4">
-							<h1 className="font-poppins text-[#404040] text-2xl font-bold">Top Gun: Maverick • 2022 • PG-13 • 2h 10m</h1>
+						<div className="flex items-center gap-x-5">
+							<div className="font-poppins text-[#404040] text-2xl font-bold gap-x-[30px] leading-[40px]">
+								<span data-testid="movie-title">{`${movie?.original_title}    •`}</span>
+								<span data-testid="movie-release-date">{`    ${new Date(movie?.release_date).toUTCString()}  •`}</span>
+								<span data-testid="movie-runtime">{`   ${movie?.runtime} `}</span>
+								{"Minutes"}
+							</div>
 							<div className="flex gap-x-3 items-center">
-								<div className="text-[#B91C1C] border border-[#F8E7EB] rounded-2xl py-1 px-[18px]">Action</div>
-								<div className="text-[#B91C1C] border border-[#F8E7EB] rounded-2xl py-1 px-[18px]">Drama</div>
+								{genres?.map((item, index) => (
+									<div
+										key={index}
+										className="text-[#B91C1C] border border-[#F8E7EB] rounded-2xl py-1 px-[18px]"
+									>
+										{item}
+									</div>
+								))}
 							</div>
 						</div>
-						<p className="text-xl text-[#333] mt-6">After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUN's elite graduates on a mission that demands the ultimate sacrifice from those chosen to fly it.</p>
+						<p
+							data-testid="movie-overview"
+							className="text-xl text-[#333] mt-6"
+						>
+							{movie?.overview}
+						</p>
 						<div className="flex flex-col gap-y-[31px] mt-5">
 							<p className="text-[#333] text-xl">
 								Director <span className="text-[#BE123C]">: Joseph Kosinski</span>
@@ -51,7 +73,7 @@ const MovieDetails = () => {
 						<div className="flex items-center justify-end gap-x-2">
 							<img
 								className="w-[30px] h-[30px] object-cover"
-								src="/src/assets/star.png"
+								src="/assets/star.png"
 								alt=""
 							/>
 							<span className="text-[25px] font-medium text-[#666]">
@@ -60,14 +82,14 @@ const MovieDetails = () => {
 						</div>
 						<button className="w-full mt-6 bg-[#BE123C] rounded-[10px] flex justify-center items-center py-3 gap-x-[10px]">
 							<img
-								src="/src/assets/tickets.png"
+								src="/assets/tickets.png"
 								alt=""
 							/>
 							<span className="text-white text-xl font-medium">See Showtimes</span>
 						</button>
 						<button className="w-full mt-3 bg-[#be123c1a] border border-[#BE123C] rounded-[10px] flex justify-center items-center py-3 gap-x-[10px]">
 							<img
-								src="/src/assets/list.png"
+								src="/assets/list.png"
 								alt=""
 							/>
 							<span className="text-xl font-medium">More watch options</span>
@@ -75,12 +97,12 @@ const MovieDetails = () => {
 						<div className="mt-8 relative">
 							<img
 								className="w-full h-full"
-								src="/src/assets/movies.png"
+								src="/assets/movies.png"
 								alt=""
 							/>
 							<div className="absolute flex bottom-0 w-full pt-3 pb-2 justify-center items-center gap-x-3 backdrop-blur-[2px]">
 								<img
-									src="/src/assets/list_white.png"
+									src="/assets/list_white.png"
 									alt=""
 								/>
 								<span className="text-[#E8E8E8] text-sm font-medium">The Best Movies and Shows in September</span>
